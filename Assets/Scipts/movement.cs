@@ -35,6 +35,6 @@ public class movement : MonoBehaviour
         RotarMouse.x += Input.GetAxis("Mouse X");
         RotarMouse.y += Input.GetAxis("Mouse Y");
 
-        transform.localRotation = Quaternion.Euler(RotarMouse.y, RotarMouse.x, 0);
+        transform.localRotation = Quaternion.Euler(-RotarMouse.y, RotarMouse.x, 0);
     }
 }
