@@ -5,11 +5,11 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     public float movimientoWASD;
-    public Vector2 RotarMouse;
+    Vector2 RotarMouse;
 
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -35,6 +35,8 @@ public class movement : MonoBehaviour
         RotarMouse.x += Input.GetAxis("Mouse X");
         RotarMouse.y += Input.GetAxis("Mouse Y");
 
-        transform.localRotation = Quaternion.Euler(-RotarMouse.y, RotarMouse.x, 0);
+        Mathf.Clamp(RotarMouse.y, -45, 45);
+        transform.localRotation = Quaternion.Euler(-RotarMouse.y * 2.5f, RotarMouse.x * 2.5f, 0);
+       
     }
 }
