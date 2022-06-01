@@ -1,42 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class movement : MonoBehaviour
 {
-    public float movimientoWASD;
-    Vector2 RotarMouse;
+    public int FOV1;
+
+    public Image imagen;
+    public GameObject Arma;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        imagen.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+ 
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        RaycastHit Adestruir; 
+
+        if (Input.GetMouseButton(1))
         {
-            transform.Translate (0, 0, movimientoWASD);
+            Camera.main.fieldOfView = FOV1;
+            imagen.gameObject.SetActive(true);
+            Arma.gameObject.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.S))
+        else
         {
-            transform.Translate (0, 0, -movimientoWASD);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate (movimientoWASD, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate (-movimientoWASD, 0, 0);
+            Camera.main.fieldOfView = 60;
+            imagen.gameObject.SetActive(false);
+            Arma.gameObject.SetActive(true);
         }
 
-        RotarMouse.x += Input.GetAxis("Mouse X");
-        RotarMouse.y += Input.GetAxis("Mouse Y");
+        if (Input.GetMouseButtonDown(0))
+        {
+           if (Physics.Raycast(transform.position, transform.forward, out Adestruir, 70))
+            {
+                string nombre = Adestruir.collider.gameObject.name;
+            }
 
-        Mathf.Clamp(RotarMouse.y, -45, 45);
-        transform.localRotation = Quaternion.Euler(-RotarMouse.y * 2.5f, RotarMouse.x * 2.5f, 0);
-       
+        }
+
     }
 }
