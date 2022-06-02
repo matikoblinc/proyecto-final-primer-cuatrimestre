@@ -5,7 +5,7 @@ using UnityEngine;
 public class SphereInstantiator : MonoBehaviour
 {
     public GameObject Sphere1;
-    int CantSpheres;
+    public static int CantSpheres;
 
     void Start()
     {
@@ -17,7 +17,8 @@ public class SphereInstantiator : MonoBehaviour
     {
         if (CantSpheres < 4)
         {
-            Instantiate(Sphere1, new Vector3(Random.Range(-14, 14), Random.Range(19, -19), Random.Range(50, 10)), Quaternion.Euler(Random.Range(0, 360), 0, 0));
+            GameObject clon;
+            clon = Instantiate(Sphere1, new Vector3(Random.Range(-14, 14), Random.Range(15, -15), Random.Range(50, 20)), Quaternion.Euler(Random.Range(0, 360), 0, 0));
             CantSpheres++;
         }
     }
